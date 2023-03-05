@@ -13,6 +13,7 @@ resource "proxmox_vm_qemu" "autobots" {
   clone       = "opensuse15sp4-template"
   agent       = 1
   os_type     = "cloud-init"
+  qemu_os     = "other"
   cores       = 2
   sockets     = 1
   cpu         = "host"
