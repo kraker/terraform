@@ -13,30 +13,18 @@ provider "proxmox" {
   pm_api_url = "https://192.168.0.176:8006/api2/json"
 }
 
-variable "proxmox_host" {
-  type = string
-  default = "mars"
-}
-
-variable "template_name" {
-  type = string
-  default = "ubuntu2004-template"
-}
-
 variable "ssh_key" {
   type = string
   default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBLiiz/AhH/lc08OzoY0/gD3ouVUxeEAivbAyXONqJLi akraker@Ubuntu-PF3TFBEH-1255"
 }
 
-output "vm_ip" {
-  value = proxmox_vm_qemu.tf_tests.*.default_ipv4_address
-}
+output "vm_ip" { value = proxmox_vm_qemu.tf_tests.*.default_ipv4_address }
 
 resource "proxmox_vm_qemu" "tf_tests" {
     count = 1
     name = "tf-${count.index + 1}"
-    target_node = var.proxmox_host
-    clone = var.template_name
+    target_node = "mars"
+    clone = "ubuntu1804-template"
     agent = 1
     os_type = "cloud-init"
     cores = 1
