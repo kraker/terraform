@@ -20,6 +20,7 @@ resource "proxmox_vm_qemu" "autobots" {
   memory      = 4096
   scsihw      = "virtio-scsi-pci"
   bootdisk    = "scsi0"
+  onboot      = true
 
   disk {
     slot    = 0
